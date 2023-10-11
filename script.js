@@ -8,7 +8,6 @@ $(document).ready(function () {
     inserirBolasComNumeros(numeros);
   });
 
-  // Event listener para o botão de ordenação
   $("#sortButton").on("click", function () {
     sortNumbers();
   });
