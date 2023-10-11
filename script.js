@@ -7,6 +7,11 @@ $(document).ready(function () {
     }
     inserirBolasComNumeros(numeros);
   });
+
+  // Event listener para o botão de ordenação
+  $("#sortButton").on("click", function () {
+    sortNumbers();
+  });
 });
 
 function generateRandomNumber() {
@@ -34,4 +39,31 @@ function getRandomColor() {
     color += letters[Math.floor(Math.random() * 16)];
   }
   return color;
+}
+
+function sortNumbers() {
+  const container = document.getElementById("bolaContainer");
+  const balls = Array.from(container.querySelectorAll(".ball"));
+
+  const sortedBalls = balls.sort((a, b) => {
+    const numberA = parseInt(a.textContent);
+    const numberB = parseInt(b.textContent);
+
+    return numberA - numberB;
+  });
+
+  balls.forEach((ball, index) => {
+    setTimeout(() => {
+      ball.classList.add("fade-out");
+    }, 500 * index);
+  });
+
+  setTimeout(() => {
+    sortedBalls.forEach((ball, index) => {
+      container.appendChild(ball);
+      setTimeout(() => {
+        ball.classList.remove("fade-out");
+      }, 50 * index);
+    });
+  }, 1000);
 }
